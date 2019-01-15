@@ -180,6 +180,12 @@ As meeting the requirements of these related cases in similar ways is extremely 
 \subsection{EDM extension addressing the initial full-text requirements}
 \label{sec:edmextension}
 
+\begin{figure}
+    \centering
+    \includegraphics{Fig1}
+    \caption{General principles for full-text annotations in the EDM extension.}
+\end{figure}
+
 Our extension of EDM for representing full-text follows the recommendations of IIIF (in its coming version 3) and WA. Full-text is represented as the body of an annotation that has as target an image, as illustrated in Fig. 1. We model the image as an \verb+edm:WebResource+ (the usual EDM approach) and the text itself as a new proposed subclass of \verb+edm:WebResource+, 
 \verb+edm:FullTextResource+\footnote{The full-text comes as \verb+rdf:value+ for the \verb+edm:FullTextResource+, using WA’s `embedded text' pattern (\url{https://www.w3.org/TR/annotation-model/##embedded-textual-body}) with a type independent from the resource’s being used in an annotation, unlike WA’s \verb+oa:TextualBody+.}.
 Fig. 2 illustrates the simplest case. Annotations are modeled using WA's \verb+oa:Annotation+ class and \verb+oa:hasBody+ and \verb+oa:hasTarget+ properties. Annotations used for representing full-text must have the property \verb+oa:motivatedBy+ with the value \verb+oa:transcribing+, distinguishing them from Europeana annotations used for other motives, as well as following IIIF's latest best practices\footnote{Cf.\, IIIF API issue 1258: \url{https://github.com/IIIF/api/issues/1258}}
@@ -187,13 +193,23 @@ Fig. 2 illustrates the simplest case. Annotations are modeled using WA's \verb+o
 
 The extension supports two levels of detail for associating the full-text with the image: with and without its position within the image. The text can also be provided by value (a plain literal) or by reference (as a URI, and/or as a selection/extract from another text resource). The following sections present the details of these options.
 
-%TODO figures
-
 \subsubsection{Full-text without position}
+
+\begin{figure}
+    \centering
+    \includegraphics{Fig2}
+    \caption{Full-text without position information.}
+\end{figure}
 
 In the simplest case, illustrated in Fig. 2, full-text is associated with an image without any information about the position of the text within the image.
 
 \subsubsection{Full-text associated with fragments with a position in the image}
+
+\begin{figure}
+    \centering
+    \includegraphics{Fig3}
+    \caption{Full-text resource with position on the image.}
+\end{figure}
 
 Our earlier analysis of newspapers corpora [7] has shown that full-text is sometimes represented as several fragments of text, each referring to a specific area of an image (an article, a specific line in the text or a word). In this case, the full-text fragment is accompanied with coordinates indicating its position on the image. 
 
@@ -203,13 +219,45 @@ In Fig. 3, the \verb+edm:FullTextResource+ consists of a fully-fledged resource 
 
 \subsubsection{Full-text selections represented as fragments with a position in the image}
 
+\begin{figure}
+    \centering
+    \includegraphics{Fig4}
+    \caption{Full-text fragment with position on the image using \emph{oa:FragmentSelector}.}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics{Fig5}
+    \caption{Full-text fragment with position using \emph{oa:TextPositionSelector}.}
+\end{figure}
+
 Fig. 4 shows how more details – in this case, the position of a particular word –  can be specified for the association between full-text and images. The area is indicated using the pattern already seen in Fig. 3, but the paragraph fragment that corresponds to the word in the full-text is also given: an \verb+oa:SpecificResource+ is created to represent how the textual body of the annotation is derived from another resource. An \verb+oa:FragmentSelector+ resource describes the range of text by recording the first and last characters' positions within the source. The \verb+oa:FragmentSelector+ must follow RFC 5147 and be the subject of a dcterms:conformsTo statement referring to http://tools.ietf.org/rfc/rfc5147 (not shown in Fig. 4). Note that the WA model offers alternatives for representing fragments: e.g., for text fragments, the data from Fig. 4 can also be represented using an \verb+oa:TextPositionSelector+, recording the start and end positions with specific properties (see Fig.5). We have decided for now to be flexible in what Europeana will accept, opening the possibility to use equivalent WA selectors. But we will seek to normalize the data we publish, i.e. retaining only one of the options – yet to be discussed with the community.
 
 \subsubsection{Logical structure of the full-text}
 
+\begin{figure}
+    \centering
+    \includegraphics{Fig6}
+    \caption{Representing the logical structure of articles and paragraphs of full-text with \emph{edm:FullTextResource} and \emph{oa:Annotation}.}
+\end{figure}
+
 Some digitization efforts apply segmentation techniques to detect the independent sections (such as articles) within a newspaper page. Our EDM extension allows representing the different sections in the full-text. First, text of different levels can be represented as different \verb+edm:FullTextResources+ connected across levels using Dublin core dcterms:hasPart and dcterms:isPartOf properties. EDM allows this for any digital representation, and this pattern can be used in particular between a newspaper file that contains several pages (images) and the image of each page. In this case, however, text is duplicated across levels. An alternative is to represent the logical structure via the organization of \verb+edm:FullTextResources+ and \verb+oa:Annotations+. Our extension assumes that each \verb+edm:FullTextResource+ can reflect a section within a page and act as  grouping for all related \verb+oa:Annotations+. Fig. 6 shows a newspaper page where two \verb+edm:FullTextResources+ represent two articles in the page. It also highlights how (targets of) \verb+oa:Annotations+ represent the paragraphs within each \verb+edm:FullTextResource+.
 
 \subsubsection{Specifying the language of the full-text}
+
+\begin{figure}
+  \begin{subfigure}[t]{0.5\textwidth}
+    \centering
+    \includegraphics[width=0.8\textwidth]{Fig7a}
+    \caption{for the whole \emph{edm:FullTextResource}}
+  \end{subfigure}\hfill
+  \begin{subfigure}[t]{0.5\textwidth}
+    \centering
+    \includegraphics[width=0.8\textwidth]{Fig7b}
+    \caption{for a piece of text in isolation (i.e., a word)}
+  \end{subfigure}
+  \caption{Specification of the language of the text.}\label{fig:example}
+\end{figure}
 
 The profile allows the indication of language of the full-text at several levels of detail. At the most general level, the language indicated in the data for the original cultural object (using Dublin Core's dc:language property on EDM's \verb+edm:ProvidedCHO+
 resource\footnote{\verb+ProvidedCHO+ stands for `Provided Cultural Heritage Object'. It is the original object that is described. It may be either a physical object (painting, book, etc.) or digital-born object.})
