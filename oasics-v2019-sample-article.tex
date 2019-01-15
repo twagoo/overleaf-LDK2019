@@ -69,10 +69,134 @@
 
 \maketitle
 
-%TODO mandatory: add short abstract of the document
+%mandatory: add short abstract of the document
 \begin{abstract}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent convallis orci arcu, eu mollis dolor. Aliquam eleifend suscipit lacinia. Maecenas quam mi, porta ut lacinia sed, convallis ac dui. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse potenti. 
+Cultural heritage institutions hold collections of printed newspapers that are valuable resources for the study of history, linguistics and other Digital Humanities scientific domains. Effective retrieval of newspapers content based on metadata only is a task nearly impossible, making the retrieval based on (digitized) full-text particularly relevant. Europeana, Europe’s Digital Library, is in position to provide access to large newspapers collec-tions with full-text resources. Full-text corpora are also relevant for Euro-peana’s objective of promoting the usage of cultural heritage resources for use within research infrastructures. We have derived requirements for aggre-gating and publishing Europeana’s newspapers full-text corpus in an in-teroperable way, based on investigations into the specific characteristics of cultural data, the needs of two research infrastructures (CLARIN and EUDAT) and the practices being promoted in the International Image In-teroperability Framework (IIIF) community. We have then defined a ‘full-text profile’ for the Europeana Data Model, which is being applied to Euro-peana’s newspaper corpus.
 \end{abstract}
+
+\section{Introduction}
+\label{sec:introduction}
+Cultural Heritage Institutions (CHIs), such as libraries and archives, hold collections of printed newspapers of the past centuries. These are valuable resources for historians, linguists and other researchers working in Digital Humanities. The retrieval of printed newspapers’ content based on metadata only is a task nearly impossible, however. CHIs usually describe the series of a newspaper publication (typically known as `title level’ description) and its individual publications (`issues’) in their catalogs, but no description of individual articles. The typical use of the catalogs of newspapers is thus only to retrieve issues by date of publication, as there is no detail for effective retrieval of the content at finer-grained levels. 
+
+The wide interest for newspapers and the challenges they pose for retrieval has motivated CHIs to prioritize the digitization of their newspapers collections. CHIs also realized that the retrieval of newspapers’ content based on machine readable full-text is particularly important, given the unavailability of article level descriptions in the catalogs. Accordingly, CHIs have also sought to apply Optical Character Recognition (OCR) during the digitization process.  
+
+Our work addresses the general problem of the retrieval of newspapers in the context of aggregations of digital CH resources, in particular that of Europeana. Europeana seeks to facilitate the use of resources from and about Europe. It enables access to objects via its Collections portal , which supports all official languages of Europe, and its open APIs enable third-party applications. Europeana is based on metatada provided by its CHI partners and presently holds metadata from over 3,700 CHIs . 
+Providing access to newspapers is relevant to Europeana’s mission, especially for promoting the re-use of CH resources for research. Europeana indeed also aims to facilitate research, especially for the digital humanities, via its Europeana Research initiative . This initiative seeks to address issues related to, e.g., licensing, which affect the research re-use of CH metadata and content. In particular, it has identified research re-use of newspapers resources as a key use case, as well as an area with strong system and data interoperability challenges.
+
+Digitized newspapers are Europeana’s first case of aggregation and distribution of full-text CH resources. Europeana’s systems have relied so far on metadata and links to digitized resources at partners’ sites. The Europeana Data Model (EDM) [1] allows it to perform scalable aggregation of (and access to) references to digital representations of CH artefacts with rich context metadata. EDM follows the Linked Open Data principles [2]. An important aspect of EDM is its flexibility and genericity: it can be easily mapped to other (CH) data models and extended [3]. This makes it a potential base for the interoperability of full-text resources within the Europeana ecosystem.
+
+This paper presents how we have tested this assumption by trying to extend EDM to cater for interoperability of full-text CH corpora. The first aim of our work is to support a centralized search engine and rich user interfaces. But we have also investigated the issue of interoperability of full-text between Europeana and research infrastructures (EUDAT and CLARIN). Our work focuses on Europeana and research use, but we claim it has impact on other application contexts, as we sought to align with the generic International Image Interoperability Framework (IIIF) . 
+We present related work on digitized newspapers and the use of CH data in research infrastructures in Section 2. Section 3 presents the explorative work conducted by Europeana, EUDAT and CLARIN, and the interoperability requirements derived from it. Section 4 presents our EDM extension for full-text, and Section 5 concludes. 
+
+\section{Related work}
+\label{sec:relatedwork}
+
+Several initiatives exist worldwide with similar target user groups and use cases as Europeana, with respect to aggregation of digitized newspapers. The organizational structure and technical interoperability context of Europeana are quite different, however. For example, Chronicling America , a national aggregation of newspapers in the US, gathers its corpus from the digitization conducted under the National Newspaper Digitization Program. The direct relation with the digitization process results in more homogeneous metadata and full-text content to provide access to.
+
+Europeana Newspapers [4] was an earlier project from the Europeana community, which aggregated metadata and full-text content in a portal that, while currently hosted by Europeana, sits on a completely disconnected platform. The project established interoperability by defining a METS/ALTO profile [5], but its application was restricted to the project and did not spread to other CHIs afterwards.
+
+The IIIF Community has conducted similar work to ours in establishing a generic representation of full-text associated with images for the IIIF Presentation API. We participate in a IIIF Newspapers Community Group that gathers IIIF community members working with digitized newspapers. We got a lot of inspiration from the IIIF representation patterns. These are quite generic however and the connection with (descriptive) metadata is rather loose in the IIIF presentation API, which relies on linking to document using models like EDM for representing fully-fledged metadata. Furthermore, directly relying on IIIF APIs is an obstacle for the metadata providers who cannot deploy IIIF services for their content.
+
+Regarding interoperability with research infrastructures, related work in CH digitized resources and OCR full-text includes Herbadrop [6]. This initiative works with resources from museums and botanical gardens, which own collections of plant samples with detailed annotations from botanists. Herbadrop has worked with the EUDAT CDI  as part of a data pilot [6]. 
+
+Finally, some CHIs provide data to CLARIN , in particular university libraries. CLARIN aggregates CH resources’ in a similar process to Europeana’s but uses a different metadata format [8]. Regarding full-text corpora within CLARIN, we observe a prevalence of the Text Encoding Initiative (TEI) format  in terms of support by existing tools and also in published research. TEI usage within the Europeana Network is limited: it is only present in CHIs that focus on supporting researchers. 
+
+\section{Needs for interoperability with Research Infrastructures}
+\label{sec:needsforinteroperability}
+Europeana is interested in investigating how research data infrastructures can facilitate the research use of CH resources. By leveraging on European level and cross-discipline infrastructures, it hopes to reach researchers from all scientific disciplines, without having to work with many national and domain-specific research infrastructures or providing its own. We describe here the efforts on the Europeana Newspapers corpus conducted with two infrastructures: CLARIN and EUDAT. This corpus was aggregated from 11 CHIs during the Europeana Newspapers project. It contains metadata descriptions, digitized images and full-text of 911 newspaper titles that, in total, comprise over 11 million pages [4]. We present, in this section, the interoperability challenges identified and what we did to tackle them. 
+
+\subsection{Interoperability with CLARIN}
+\label{sec:interoperabilitywithclarin}
+CLARIN is a federation of language data repositories, service centers and centers of expertise. CLARIN aggregates metadata and makes the underlying resources discoverable and usable within research workflows. It allows researchers to carry out natural language processing tasks by invoking processing tools directly from its generic user interface. Establishing good interoperability between Europeana and CLARIN can help fitting a large number of CH resources into CLARIN’s supported workflows. It will open up new applications for CLARIN’s processing tools and greatly promote research incorporating CH resources.
+
+CLARIN carried out a first analysis of the Europeana Newspapers corpus in 2015, establishing goals and a ground for connecting the two infrastructures and full-text interoperability. Later, we sought to address the interoperability issue for metadata [9]. The two infrastructures use specific metadata models: EDM for Europeana and the Component MetaData Infrastructure (CMDI) for CLARIN [8]. Interoperability is achieved via CLARIN’s metadata conversion mechanisms, based on a CMDI profile for EDM . Europeana’s metadata for Newspapers and other datasets can thus be made available within the CLARIN systems. 
+
+The desirable interoperability between the two infrastructures has not been achieved, however. The Newspapers full-text corpus, although discoverable within CLARIN, cannot yet be processed by CLARIN’s tools in research workflows. The following requirements for how metadata and full-text content are made available by CHIs were noted and greatly influenced our work on extending EDM for exchanging full-text content:
+\begin{itemize}
+\item Direct links to content files – when CHIs only share with Europeana links to websites or viewers, the files cannot be processed by CLARIN (and others).
+\item Technical metadata – information like media type and file size are essential for automated processing workflows and highly desirable for discovery
+\item Language of the content – most natural language processing tools are language dependent, making the language information carried in CH metadata essential.
+\end{itemize}
+
+\subsection{Interoperability with EUDAT}
+\label{sec:interoperabilitywitheudat}
+EUDAT is a European infrastructure of integrated data services devoted to scientific and research data storage and lifecycle management. It has been developed in close collaboration with over 50 research communities spanning across many different scientific disciplines such as Life Sciences, Humanities, Earth Sciences and Physics, with more than 20 major European research organizations, data centres and computing centres involved. Many of these collaborations are carried out as data pilots providing test-beds that vary in disciplines, communities, project group sizes and technological maturity. Europeana conducted a data pilot with EUDAT that consisted in a case study on the Europeana Newspapers corpus [6]. The general goal was to investigate how EUDAT data services can facilitate the use of CH resources for research purposes. The questions laid out at the start of the data pilot were:
+\begin{itemize}
+\item How can the resources be discovered?
+\item How can the resources be shared in practical ways for researchers? 
+\item How can advanced computation be applied to these CH datasets? 
+\item How can the resources and datasets be cited and referenced in research?
+\item How can the CH institutions re-use the outcomes of research?
+\end{itemize}
+
+An evaluation of the available EUDAT services was conducted, using the newspapers corpus as case study. The two infrastructures were successfully interconnected and EUDAT fulfilled the expectations for making the corpus available to researchers and for computational processing. The persistent identification of EUDAT resources also met the citability requirement. The EUDAT service did not scale to the dimension of the corpus, but only due to an underestimation of the required computational capacity during the pilot [6]. Beyond the full-text corpus case study, interoperability was also trialled for metadata-based discovery of CH datasets. Both infrastructures have common underlying technologies that facilitate interoperability, including on modelling full-text, since EUDAT is developing its semantic annotation service based on the W3C Web Annotation Data Model , which is a key component of the EDM extension we are going to present in the next section.
+
+\section{Building a full-text profile for the Europeana Data Model}
+\label{sec:buildingfulltextprofile}
+
+A profile for representing full-text in EDM is a key requirement for achieving a sustainable interoperability framework for full-text CH corpora in Europeana. It has potential applications in full-text aggregation, indexing, user experience and data re-use. This section presents the context, requirements and the EDM full-text profile.
+
+\subsection{Context and requirements for designing the data model}
+\label{sec:contextandrequirements}
+
+Based on the corpus of full-text newspapers, the case studies and recommendations from the earlier Europeana projects [4,7], we have identified these requirements:
+\begin{itemize}
+\item The availability of full-text must be stated explicitly in the metadata.
+\item The representation of full-text should be compatible with the representation of structured newspapers in the descriptive metadata.
+\item URLs to views of the digital objects must be explicitly stated in the metadata.
+\item Multiple full-text resources must be referenced via direct URLs. 
+\item Resources requiring a protocol to be served need to be clearly identifiable.
+\item When more than one full-text resource is associated with a digital object, it should be possible to represent their part-whole relationship. 
+\item When more than one full-text resource is associated with a digital object, it should be possible to represent their sequential order. 
+\item When a full-text resource is available as a fragment of text, the URI or the literal identifying the specific text fragment may be provided in the data.
+\item When a full-text fragment is available, the image area it refers to should be identified (via coordinates).
+\end{itemize}
+
+The IIIF community has suggested to publish textual representations of (part of) images, such as transcriptions, using annotations from the W3C Web Annotation model (WA). Annotations are included in the IIIF “manifests”  of the newspapers, as a list of annotations, each one referring to a portion of the full-text and indicating its corresponding position in the image of a page. Representing full-text as annotations seems the best solution as it can support simple scenarios such as the positioning of a text fragment on an image as well as more complex ones like OCR correction.
+
+This approach, besides its community traction, is compatible with the Linked Data vision and fits well Europeana’s use of annotations for other purposes [10]. One of the cases that has recently emerged in Europeana is indeed the representation of manual transcriptions of content . As meeting the requirements of these related cases in similar ways is extremely desirable, we decided to follow the IIIF Community approach. Our modelling exercise thus becomes one of fitting into EDM a representation of the full-text content of newspapers as annotations on the images of newspapers’ pages. 
+
+\subsection{EDM extension addressing the initial full-text requirements}
+\label{sec:edmextension}
+
+Our extension of EDM for representing full-text follows the recommendations of IIIF (in its coming version 3) and WA. Full-text is represented as the body of an annotation that has as target an image, as illustrated in Fig. 1. We model the image as an edm:WebResource (the usual EDM approach) and the text itself as a new proposed subclass of edm:WebResource, edm:FullTextResource . Fig. 2 illustrates the simplest case. Annotations are modeled using WA’s oa:Annotation class and oa:hasBody and oa:hasTarget properties. Annotations used for representing full-text must have the property oa:motivatedBy with the value ‘oa:transcribing’, distinguishing them from Europeana annotations used for other motives, as well as following IIIF’s latest best practices  (NB: we omit it from our figures for readability reasons).
+
+The extension supports two levels of detail for associating the full-text with the image: with and without its position within the image. The text can also be provided by value (a plain literal) or by reference (as a URI, and/or as a selection/extract from another text resource). The following sections present the details of these options.
+
+%TODO figures
+
+\subsubsection{Full-text without position}
+
+In the simplest case, illustrated in Fig. 2, full-text is associated with an image without any information about the position of the text within the image.
+
+\subsubsection{Full-text associated with fragments with a position in the image}
+
+Our earlier analysis of newspapers corpora [7] has shown that full-text is sometimes represented as several fragments of text, each referring to a specific area of an image (an article, a specific line in the text or a word). In this case, the full-text fragment is accompanied with coordinates indicating its position on the image. 
+
+To support this requirement, we introduce in the model the oa:SpecificResource that “is used in between the Annotation and the body or target, as appropriate, to capture the additional description of how it is used in the annotation” [9]. An oa:FragmentSelector is applied as selector within the oa:SpecificResource to restrict the original target (the edm:WebResource) to the specific area to which the text, or fragment, corresponds. Fig. 3, 4 and 5 show examples of this solution.
+
+In Fig. 3, the \verb edm:FullTextResource consists of a fully-fledged resource that corresponds to a paragraph whose position is indicated by the \verb oa:FragmentSelector. Note that for rectangle areas, coordinates in the \verb oa:FragmentSelector must follow the Media Fragments W3C recommendation and be the subject of a \verb dcterms:conformsTo statement referring to \verb http://www.w3.org/TR/media-frags/ \,(not shown in the figure).
+
+\subsubsection{Full-text selections represented as fragments with a position in the image}
+
+Fig. 4 shows how more details – in this case, the position of a particular word –  can be specified for the association between full-text and images. The area is indicated using the pattern already seen in Fig. 3, but the paragraph fragment that corresponds to the word in the full-text is also given: an oa:SpecificResource is created to represent how the textual body of the annotation is derived from another resource. An oa:FragmentSelector resource describes the range of text by recording the first and last characters’ positions within the source. The oa:FragmentSelector must follow RFC 5147 and be the subject of a dcterms:conformsTo statement referring to http://tools.ietf.org/rfc/rfc5147 (not shown in Fig. 4). Note that the WA model offers alternatives for representing fragments: e.g., for text fragments, the data from Fig. 4 can also be represented using an oa:TextPositionSelector, recording the start and end positions with specific properties (see Fig.5). We have decided for now to be flexible in what Europeana will accept, opening the possibility to use equivalent WA selectors. But we will seek to normalize the data we publish, i.e. retaining only one of the options – yet to be discussed with the community.
+
+\subsubsection{Logical structure of the full-text}
+
+Some digitization efforts apply segmentation techniques to detect the independent sections (such as articles) within a newspaper page. Our EDM extension allows representing the different sections in the full-text. First, text of different levels can be represented as different edm:FullTextResources connected across levels using Dublin core dcterms:hasPart and dcterms:isPartOf properties. EDM allows this for any digital representation, and this pattern can be used in particular between a newspaper file that contains several pages (images) and the image of each page. In this case, however, text is duplicated across levels. An alternative is to represent the logical structure via the organization of edm:FullTextResources and oa:Annotations. Our extension assumes that each edm:FullTextResource can reflect a section within a page and act as  grouping for all related oa:Annotations. Fig. 6 shows a newspaper page where two edm:FullTextResources represent two articles in the page. It also highlights how (targets of) oa:Annotations represent the paragraphs within each edm:FullTextResource.
+
+\subsubsection{Specifying the language of the full-text}
+
+The profile allows the indication of language of the full-text at several levels of detail. At the most general level, the language indicated in the data for the original cultural object (using Dublin Core’s dc:language property on EDM’s edm:ProvidedCHO resource ) can be seen to apply to the whole full-text as well. Our profile assumes that when a (sub-component of) the full-text does not specify its language, then it inherits the language from the higher levels of its hierarchy. This pattern enables to represent cases when a word in one language is present within a text in another language. But there can be different languages, or a data publisher may prefer to express precise information that does not depend on implicit ‘propagation’ rules between levels in the data. Therefore, the language may be specified at the level of any edm:FullTextResource, using an RDF language tag on the rdf:value of the resource or the dc:language property . At the finest level of detail, languages may be specified on the oa:SpecificResource referring to text fragments. Fig. 7 illustrates using dc:language on the edm:FullTextResource and the oa:SpecificResource.
+
+\section{Future Work and Conclusion}
+
+Europeana’s investigations in exploring its newspapers full-text corpus with research infrastructures has provided valuable input for making CH corpora better discoverable, accessible, machine processable and citable in research contexts. The requirements identified for research usage of CH full-text corpora support several aspects of the current strategy of Europeana towards improving data quality and direct access to the media contents of CH digital objects [11]. 
+
+The currently aggregated full-text corpus of Europeana Newspapers has not grown since the end of the Europeana Newspapers project, and an aggregation process based on the ALTO profile was impossible to establish in a sustainable way at Europeana. The new model, being based on EDM and following the IIIF Community approach is expected to lower the technical barriers to establish a sustainable full-text aggregation process. Currently, Europeana is already converting the Europeana Newspapers corpus to the EDM full-text profile and adapting its infrastructure for ingestion of the corpus . In the near future, our EDM full-text profile is going to be used as the basis to re-start the aggregation processes of full-text newspapers content across the Europeana Network. In parallel, we will update the EDM full-text profile, by devising a more precise approach to the modeling alternatives that the current version allows – we have already begun to actively seek feedback from the IIIF Newspapers community. We will also tackle new requirement that could emerge during its adoption: for example, some Europeana stakeholders have voiced interested in an explicit representation of the granularity of the full-text (page, article, paragraph, line, word).
+
+Future work will also address the indexing and retrieval of full-text EDM data, as well as the evaluation of its capacity for supporting rich user-interfaces and data re-use through Europeana’s APIs as well as through research infrastructures.
+
 
 \section{Typesetting instructions -- Summary}
 \label{sec:typesetting-summary}
@@ -129,77 +253,77 @@ In case of \textbf{non-compliance} with these rules Dagstuhl Publishing will rem
 This is only a summary containing the most relevant details. Please read the complete document ``OASIcs: Instructions for Authors and the \texttt{oasics-v2019} Class'' for all details and don't hesitate to contact Dagstuhl Publishing (\url{mailto:publishing@dagstuhl.de}) in case of questions or comments:
 \href{http://drops.dagstuhl.de/styles/oasics-v2019/oasics-v2019-authors/oasics-v2019-authors-guidelines.pdf}{\texttt{http://drops.dagstuhl.de/styles/oasics-v2019/\newline oasics-v2019-authors/oasics-v2019-authors-guidelines.pdf}}
 
-\section{Lorem ipsum dolor sit amet}
+% \section{Lorem ipsum dolor sit amet}
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit \cite{DBLP:journals/cacm/Knuth74}. Praesent convallis orci arcu, eu mollis dolor. Aliquam eleifend suscipit lacinia. Maecenas quam mi, porta ut lacinia sed, convallis ac dui. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse potenti. Donec eget odio et magna ullamcorper vehicula ut vitae libero. Maecenas lectus nulla, auctor nec varius ac, ultricies et turpis. Pellentesque id ante erat. In hac habitasse platea dictumst. Curabitur a scelerisque odio. Pellentesque elit risus, posuere quis elementum at, pellentesque ut diam. Quisque aliquam libero id mi imperdiet quis convallis turpis eleifend. 
+% Lorem ipsum dolor sit amet, consectetur adipiscing elit \cite{DBLP:journals/cacm/Knuth74}. Praesent convallis orci arcu, eu mollis dolor. Aliquam eleifend suscipit lacinia. Maecenas quam mi, porta ut lacinia sed, convallis ac dui. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse potenti. Donec eget odio et magna ullamcorper vehicula ut vitae libero. Maecenas lectus nulla, auctor nec varius ac, ultricies et turpis. Pellentesque id ante erat. In hac habitasse platea dictumst. Curabitur a scelerisque odio. Pellentesque elit risus, posuere quis elementum at, pellentesque ut diam. Quisque aliquam libero id mi imperdiet quis convallis turpis eleifend. 
 
-\begin{lemma}[Lorem ipsum]
-\label{lemma:lorem}
-Vestibulum sodales dolor et dui cursus iaculis. Nullam ullamcorper purus vel turpis lobortis eu tempus lorem semper. Proin facilisis gravida rutrum. Etiam sed sollicitudin lorem. Proin pellentesque risus at elit hendrerit pharetra. Integer at turpis varius libero rhoncus fermentum vitae vitae metus.
-\end{lemma}
+% \begin{lemma}[Lorem ipsum]
+% \label{lemma:lorem}
+% Vestibulum sodales dolor et dui cursus iaculis. Nullam ullamcorper purus vel turpis lobortis eu tempus lorem semper. Proin facilisis gravida rutrum. Etiam sed sollicitudin lorem. Proin pellentesque risus at elit hendrerit pharetra. Integer at turpis varius libero rhoncus fermentum vitae vitae metus.
+% \end{lemma}
 
-\begin{proof}
-Cras purus lorem, pulvinar et fermentum sagittis, suscipit quis magna.
+% \begin{proof}
+% Cras purus lorem, pulvinar et fermentum sagittis, suscipit quis magna.
 
-\begin{claim}
-content...
-\end{claim}
-\begin{claimproof}
-content...
-\end{claimproof}
+% \begin{claim}
+% content...
+% \end{claim}
+% \begin{claimproof}
+% content...
+% \end{claimproof}
 
-\end{proof}
+% \end{proof}
 
-\begin{corollary}[Curabitur pulvinar, \cite{DBLP:books/mk/GrayR93}]
-\label{lemma:curabitur}
-Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
-\end{corollary}
+% \begin{corollary}[Curabitur pulvinar, \cite{DBLP:books/mk/GrayR93}]
+% \label{lemma:curabitur}
+% Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+% \end{corollary}
 
-\begin{proposition}\label{prop1}
-This is a proposition
-\end{proposition}
+% \begin{proposition}\label{prop1}
+% This is a proposition
+% \end{proposition}
 
-\autoref{prop1} and \cref{prop1} \ldots
+% \autoref{prop1} and \cref{prop1} \ldots
 
-\subsection{Curabitur dictum felis id sapien}
+% \subsection{Curabitur dictum felis id sapien}
 
-Curabitur dictum \cref{lemma:curabitur} felis id sapien \autoref{lemma:curabitur} mollis ut venenatis tortor feugiat. Curabitur sed velit diam. Integer aliquam, nunc ac egestas lacinia, nibh est vehicula nibh, ac auctor velit tellus non arcu. Vestibulum lacinia ipsum vitae nisi ultrices eget gravida turpis laoreet. Duis rutrum dapibus ornare. Nulla vehicula vulputate iaculis. Proin a consequat neque. Donec ut rutrum urna. Morbi scelerisque turpis sed elit sagittis eu scelerisque quam condimentum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aenean nec faucibus leo. Cras ut nisl odio, non tincidunt lorem. Integer purus ligula, venenatis et convallis lacinia, scelerisque at erat. Fusce risus libero, convallis at fermentum in, dignissim sed sem. Ut dapibus orci vitae nisl viverra nec adipiscing tortor condimentum \cite{DBLP:journals/cacm/Dijkstra68a}. Donec non suscipit lorem. Nam sit amet enim vitae nisl accumsan pretium. 
+% Curabitur dictum \cref{lemma:curabitur} felis id sapien \autoref{lemma:curabitur} mollis ut venenatis tortor feugiat. Curabitur sed velit diam. Integer aliquam, nunc ac egestas lacinia, nibh est vehicula nibh, ac auctor velit tellus non arcu. Vestibulum lacinia ipsum vitae nisi ultrices eget gravida turpis laoreet. Duis rutrum dapibus ornare. Nulla vehicula vulputate iaculis. Proin a consequat neque. Donec ut rutrum urna. Morbi scelerisque turpis sed elit sagittis eu scelerisque quam condimentum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aenean nec faucibus leo. Cras ut nisl odio, non tincidunt lorem. Integer purus ligula, venenatis et convallis lacinia, scelerisque at erat. Fusce risus libero, convallis at fermentum in, dignissim sed sem. Ut dapibus orci vitae nisl viverra nec adipiscing tortor condimentum \cite{DBLP:journals/cacm/Dijkstra68a}. Donec non suscipit lorem. Nam sit amet enim vitae nisl accumsan pretium. 
 
-\begin{lstlisting}[caption={Useless code},label=list:8-6,captionpos=t,float,abovecaptionskip=-\medskipamount]
-for i:=maxint to 0 do 
-begin 
-    j:=square(root(i));
-end;
-\end{lstlisting}
+% \begin{lstlisting}[caption={Useless code},label=list:8-6,captionpos=t,float,abovecaptionskip=-\medskipamount]
+% for i:=maxint to 0 do 
+% begin 
+%     j:=square(root(i));
+% end;
+% \end{lstlisting}
 
-\subsection{Proin ac fermentum augue}
+% \subsection{Proin ac fermentum augue}
 
-Proin ac fermentum augue. Nullam bibendum enim sollicitudin tellus egestas lacinia euismod orci mollis. Nulla facilisi. Vivamus volutpat venenatis sapien, vitae feugiat arcu fringilla ac. Mauris sapien tortor, sagittis eget auctor at, vulputate pharetra magna. Sed congue, dui nec vulputate convallis, sem nunc adipiscing dui, vel venenatis mauris sem in dui. Praesent a pretium quam. Mauris non mauris sit amet eros rutrum aliquam id ut sapien. Nulla aliquet fringilla sagittis. Pellentesque eu metus posuere nunc tincidunt dignissim in tempor dolor. Nulla cursus aliquet enim. Cras sapien risus, accumsan eu cursus ut, commodo vel velit. Praesent aliquet consectetur ligula, vitae iaculis ligula interdum vel. Integer faucibus faucibus felis. 
+% Proin ac fermentum augue. Nullam bibendum enim sollicitudin tellus egestas lacinia euismod orci mollis. Nulla facilisi. Vivamus volutpat venenatis sapien, vitae feugiat arcu fringilla ac. Mauris sapien tortor, sagittis eget auctor at, vulputate pharetra magna. Sed congue, dui nec vulputate convallis, sem nunc adipiscing dui, vel venenatis mauris sem in dui. Praesent a pretium quam. Mauris non mauris sit amet eros rutrum aliquam id ut sapien. Nulla aliquet fringilla sagittis. Pellentesque eu metus posuere nunc tincidunt dignissim in tempor dolor. Nulla cursus aliquet enim. Cras sapien risus, accumsan eu cursus ut, commodo vel velit. Praesent aliquet consectetur ligula, vitae iaculis ligula interdum vel. Integer faucibus faucibus felis. 
 
-\begin{itemize}
-\item Ut vitae diam augue. 
-\item Integer lacus ante, pellentesque sed sollicitudin et, pulvinar adipiscing sem. 
-\item Maecenas facilisis, leo quis tincidunt egestas, magna ipsum condimentum orci, vitae facilisis nibh turpis et elit. 
-\end{itemize}
+% \begin{itemize}
+% \item Ut vitae diam augue. 
+% \item Integer lacus ante, pellentesque sed sollicitudin et, pulvinar adipiscing sem. 
+% \item Maecenas facilisis, leo quis tincidunt egestas, magna ipsum condimentum orci, vitae facilisis nibh turpis et elit. 
+% \end{itemize}
 
-\begin{remark}
-content...
-\end{remark}
+% \begin{remark}
+% content...
+% \end{remark}
 
-\section{Pellentesque quis tortor}
+% \section{Pellentesque quis tortor}
 
-Nec urna malesuada sollicitudin. Nulla facilisi. Vivamus aliquam tempus ligula eget ornare. Praesent eget magna ut turpis mattis cursus. Aliquam vel condimentum orci. Nunc congue, libero in gravida convallis \cite{DBLP:conf/focs/HopcroftPV75}, orci nibh sodales quam, id egestas felis mi nec nisi. Suspendisse tincidunt, est ac vestibulum posuere, justo odio bibendum urna, rutrum bibendum dolor sem nec tellus. 
+% Nec urna malesuada sollicitudin. Nulla facilisi. Vivamus aliquam tempus ligula eget ornare. Praesent eget magna ut turpis mattis cursus. Aliquam vel condimentum orci. Nunc congue, libero in gravida convallis \cite{DBLP:conf/focs/HopcroftPV75}, orci nibh sodales quam, id egestas felis mi nec nisi. Suspendisse tincidunt, est ac vestibulum posuere, justo odio bibendum urna, rutrum bibendum dolor sem nec tellus. 
 
-\begin{lemma} [Quisque blandit tempus nunc]
-Sed interdum nisl pretium non. Mauris sodales consequat risus vel consectetur. Aliquam erat volutpat. Nunc sed sapien ligula. Proin faucibus sapien luctus nisl feugiat convallis faucibus elit cursus. Nunc vestibulum nunc ac massa pretium pharetra. Nulla facilisis turpis id augue venenatis blandit. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-\end{lemma}
+% \begin{lemma} [Quisque blandit tempus nunc]
+% Sed interdum nisl pretium non. Mauris sodales consequat risus vel consectetur. Aliquam erat volutpat. Nunc sed sapien ligula. Proin faucibus sapien luctus nisl feugiat convallis faucibus elit cursus. Nunc vestibulum nunc ac massa pretium pharetra. Nulla facilisis turpis id augue venenatis blandit. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+% \end{lemma}
 
-Fusce eu leo nisi. Cras eget orci neque, eleifend dapibus felis. Duis et leo dui. Nam vulputate, velit et laoreet porttitor, quam arcu facilisis dui, sed malesuada risus massa sit amet neque.
+% Fusce eu leo nisi. Cras eget orci neque, eleifend dapibus felis. Duis et leo dui. Nam vulputate, velit et laoreet porttitor, quam arcu facilisis dui, sed malesuada risus massa sit amet neque.
 
-\appendix
-\section{Morbi eros magna}
+% \appendix
+% \section{Morbi eros magna}
 
-Morbi eros magna, vestibulum non posuere non, porta eu quam. Maecenas vitae orci risus, eget imperdiet mauris. Donec massa mauris, pellentesque vel lobortis eu, molestie ac turpis. Sed condimentum convallis dolor, a dignissim est ultrices eu. Donec consectetur volutpat eros, et ornare dui ultricies id. Vivamus eu augue eget dolor euismod ultrices et sit amet nisi. Vivamus malesuada leo ac leo ullamcorper tempor. Donec justo mi, tempor vitae aliquet non, faucibus eu lacus. Donec dictum gravida neque, non porta turpis imperdiet eget. Curabitur quis euismod ligula. 
+% Morbi eros magna, vestibulum non posuere non, porta eu quam. Maecenas vitae orci risus, eget imperdiet mauris. Donec massa mauris, pellentesque vel lobortis eu, molestie ac turpis. Sed condimentum convallis dolor, a dignissim est ultrices eu. Donec consectetur volutpat eros, et ornare dui ultricies id. Vivamus eu augue eget dolor euismod ultrices et sit amet nisi. Vivamus malesuada leo ac leo ullamcorper tempor. Donec justo mi, tempor vitae aliquet non, faucibus eu lacus. Donec dictum gravida neque, non porta turpis imperdiet eget. Curabitur quis euismod ligula. 
 
 
 %%
@@ -210,116 +334,52 @@ Morbi eros magna, vestibulum non posuere non, porta eu quam. Maecenas vitae orci
 
 \bibliography{oasics-v2019-sample-article}
 
-\appendix
+% \appendix
 
-\section{Styles of lists, enumerations, and descriptions}\label{sec:itemStyles}
+% \section{Styles of lists, enumerations, and descriptions}\label{sec:itemStyles}
 
-List of different predefined enumeration styles:
+% List of different predefined enumeration styles:
 
-\begin{itemize}
-\item \verb|\begin{itemize}...\end{itemize}|
-\item \dots
-\item \dots
-%\item \dots
-\end{itemize}
+% \begin{itemize}
+% \item \verb|\begin{itemize}...\end{itemize}|
+% \item \dots
+% \item \dots
+% %\item \dots
+% \end{itemize}
 
-\begin{enumerate}
-\item \verb|\begin{enumerate}...\end{enumerate}|
-\item \dots
-\item \dots
-%\item \dots
-\end{enumerate}
+% \begin{enumerate}
+% \item \verb|\begin{enumerate}...\end{enumerate}|
+% \item \dots
+% \item \dots
+% %\item \dots
+% \end{enumerate}
 
-\begin{alphaenumerate}
-\item \verb|\begin{alphaenumerate}...\end{alphaenumerate}|
-\item \dots
-\item \dots
-%\item \dots
-\end{alphaenumerate}
+% \begin{alphaenumerate}
+% \item \verb|\begin{alphaenumerate}...\end{alphaenumerate}|
+% \item \dots
+% \item \dots
+% %\item \dots
+% \end{alphaenumerate}
 
-\begin{romanenumerate}
-\item \verb|\begin{romanenumerate}...\end{romanenumerate}|
-\item \dots
-\item \dots
-%\item \dots
-\end{romanenumerate}
+% \begin{romanenumerate}
+% \item \verb|\begin{romanenumerate}...\end{romanenumerate}|
+% \item \dots
+% \item \dots
+% %\item \dots
+% \end{romanenumerate}
 
-\begin{bracketenumerate}
-\item \verb|\begin{bracketenumerate}...\end{bracketenumerate}|
-\item \dots
-\item \dots
-%\item \dots
-\end{bracketenumerate}
+% \begin{bracketenumerate}
+% \item \verb|\begin{bracketenumerate}...\end{bracketenumerate}|
+% \item \dots
+% \item \dots
+% %\item \dots
+% \end{bracketenumerate}
 
-\begin{description}
-\item[Description 1] \verb|\begin{description} \item[Description 1]  ...\end{description}|
-\item[Description 2] Fusce eu leo nisi. Cras eget orci neque, eleifend dapibus felis. Duis et leo dui. Nam vulputate, velit et laoreet porttitor, quam arcu facilisis dui, sed malesuada risus massa sit amet neque.
-\item[Description 3]  \dots
-%\item \dots
-\end{description}
-
-\section{Theorem-like environments}\label{sec:theorem-environments}
-
-List of different predefined enumeration styles:
-
-\begin{theorem}\label{testenv-theorem}
-Fusce eu leo nisi. Cras eget orci neque, eleifend dapibus felis. Duis et leo dui. Nam vulputate, velit et laoreet porttitor, quam arcu facilisis dui, sed malesuada risus massa sit amet neque.
-\end{theorem}
-
-\begin{lemma}\label{testenv-lemma}
-Fusce eu leo nisi. Cras eget orci neque, eleifend dapibus felis. Duis et leo dui. Nam vulputate, velit et laoreet porttitor, quam arcu facilisis dui, sed malesuada risus massa sit amet neque.
-\end{lemma}
-
-\begin{corollary}\label{testenv-corollary}
-Fusce eu leo nisi. Cras eget orci neque, eleifend dapibus felis. Duis et leo dui. Nam vulputate, velit et laoreet porttitor, quam arcu facilisis dui, sed malesuada risus massa sit amet neque.
-\end{corollary}
-
-\begin{proposition}\label{testenv-proposition}
-Fusce eu leo nisi. Cras eget orci neque, eleifend dapibus felis. Duis et leo dui. Nam vulputate, velit et laoreet porttitor, quam arcu facilisis dui, sed malesuada risus massa sit amet neque.
-\end{proposition}
-
-\begin{exercise}\label{testenv-exercise}
-Fusce eu leo nisi. Cras eget orci neque, eleifend dapibus felis. Duis et leo dui. Nam vulputate, velit et laoreet porttitor, quam arcu facilisis dui, sed malesuada risus massa sit amet neque.
-\end{exercise}
-
-\begin{definition}\label{testenv-definition}
-Fusce eu leo nisi. Cras eget orci neque, eleifend dapibus felis. Duis et leo dui. Nam vulputate, velit et laoreet porttitor, quam arcu facilisis dui, sed malesuada risus massa sit amet neque.
-\end{definition}
-
-\begin{example}\label{testenv-example}
-Fusce eu leo nisi. Cras eget orci neque, eleifend dapibus felis. Duis et leo dui. Nam vulputate, velit et laoreet porttitor, quam arcu facilisis dui, sed malesuada risus massa sit amet neque.
-\end{example}
-
-\begin{note}\label{testenv-note}
-Fusce eu leo nisi. Cras eget orci neque, eleifend dapibus felis. Duis et leo dui. Nam vulputate, velit et laoreet porttitor, quam arcu facilisis dui, sed malesuada risus massa sit amet neque.
-\end{note}
-
-\begin{note*}
-Fusce eu leo nisi. Cras eget orci neque, eleifend dapibus felis. Duis et leo dui. Nam vulputate, velit et laoreet porttitor, quam arcu facilisis dui, sed malesuada risus massa sit amet neque.
-\end{note*}
-
-\begin{remark}\label{testenv-remark}
-Fusce eu leo nisi. Cras eget orci neque, eleifend dapibus felis. Duis et leo dui. Nam vulputate, velit et laoreet porttitor, quam arcu facilisis dui, sed malesuada risus massa sit amet neque.
-\end{remark}
-
-\begin{remark*}
-Fusce eu leo nisi. Cras eget orci neque, eleifend dapibus felis. Duis et leo dui. Nam vulputate, velit et laoreet porttitor, quam arcu facilisis dui, sed malesuada risus massa sit amet neque.
-\end{remark*}
-
-\begin{claim}\label{testenv-claim}
-Fusce eu leo nisi. Cras eget orci neque, eleifend dapibus felis. Duis et leo dui. Nam vulputate, velit et laoreet porttitor, quam arcu facilisis dui, sed malesuada risus massa sit amet neque.
-\end{claim}
-
-\begin{claim*}\label{testenv-claim2}
-Fusce eu leo nisi. Cras eget orci neque, eleifend dapibus felis. Duis et leo dui. Nam vulputate, velit et laoreet porttitor, quam arcu facilisis dui, sed malesuada risus massa sit amet neque.
-\end{claim*}
-
-\begin{proof}
-Fusce eu leo nisi. Cras eget orci neque, eleifend dapibus felis. Duis et leo dui. Nam vulputate, velit et laoreet porttitor, quam arcu facilisis dui, sed malesuada risus massa sit amet neque.
-\end{proof}
-
-\begin{claimproof}
-Fusce eu leo nisi. Cras eget orci neque, eleifend dapibus felis. Duis et leo dui. Nam vulputate, velit et laoreet porttitor, quam arcu facilisis dui, sed malesuada risus massa sit amet neque.
-\end{claimproof}
+% \begin{description}
+% \item[Description 1] \verb|\begin{description} \item[Description 1]  ...\end{description}|
+% \item[Description 2] Fusce eu leo nisi. Cras eget orci neque, eleifend dapibus felis. Duis et leo dui. Nam vulputate, velit et laoreet porttitor, quam arcu facilisis dui, sed malesuada risus massa sit amet neque.
+% \item[Description 3]  \dots
+% %\item \dots
+% \end{description}
 
 \end{document}
