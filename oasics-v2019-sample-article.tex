@@ -93,7 +93,7 @@ Digitized newspapers are Europeana's first case of aggregation and distribution 
 
 This paper presents how we have tested this assumption by trying to extend EDM to cater for interoperability of full-text CH corpora. The first aim of our work is to support a centralized search engine and rich user interfaces. But we have also investigated the issue of interoperability of full-text between Europeana and research infrastructures (EUDAT and CLARIN). Our work focuses on Europeana and research use, but we claim it has impact on other application contexts, as we sought to align with the generic International Image Interoperability Framework
 (IIIF)\footnote{\url{https//iiif.io}}. 
-We present related work on digitized newspapers and the use of CH data in research infrastructures in Section 2. Section 3 presents the explorative work conducted by Europeana, EUDAT and CLARIN, and the interoperability requirements derived from it. Section 4 presents our EDM extension for full-text, and Section 5 concludes. 
+We present related work on digitized newspapers and the use of CH data in research infrastructures in Section~\ref{sec:relatedwork}. Section~\ref{sec:needsforinteroperability} presents the explorative work conducted by Europeana, EUDAT and CLARIN, and the interoperability requirements derived from it. Section~\ref{sec:buildingfulltextprofile} presents our EDM extension for full-text, and Section~\ref{sec:conclusion} concludes. 
 
 \section{Related work}
 \label{sec:relatedwork}
@@ -265,6 +265,7 @@ can be seen to apply to the whole full-text as well. Our profile assumes that wh
 At the finest level of detail, languages may be specified on the oa:SpecificResource referring to text fragments. Figure~\ref{fig:languagespecification} illustrates using dc:language on the \verb+edm:FullTextResource+ and the \verb+oa:SpecificResource+.
 
 \section{Future Work and Conclusion}
+\label{sec:conclusion}
 
 Europeana's investigations in exploring its newspapers full-text corpus with research infrastructures has provided valuable input for making CH corpora better discoverable, accessible, machine processable and citable in research contexts. The requirements identified for research usage of CH full-text corpora support several aspects of the current strategy of Europeana towards improving data quality and direct access to the media contents of CH digital objects [11]. 
 
