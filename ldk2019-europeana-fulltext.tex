@@ -20,19 +20,19 @@
 \titlerunning{Opening Digitized Newspapers Corpora}%optional, please use if title is longer than one line
 
 
-%TODO de-anonymise
-% \author{Nuno Freire}{INESC-ID, Lisbon, Portugal}{nuno.freire@tecnico.ulisboa.pt}{https://orcid.org/0000-0002-3632-8046}{}%mandatory, please use full name; only 1 author per \author macro; first two parameters are mandatory, other parameters can be empty. Please provide at least the name of the affiliation and the country. The full address is optional
+%TODO: anonymize author info before submission
+\author{Nuno Freire}{INESC-ID, Lisbon, Portugal}{nuno.freire@tecnico.ulisboa.pt}{https://orcid.org/0000-0002-3632-8046}{}%mandatory, please use full name; only 1 author per \author macro; first two parameters are mandatory, other parameters can be empty. Please provide at least the name of the affiliation and the country. The full address is optional
 
-% \author{Antoine Isaac}{Europeana Foundation, The Hague, The Netherlands}{antoine.isaac@europeana.eu}{https://orcid.org/0000-0001-9767-6979}{}
-% \author{Twan Goosen}{CLARIN ERIC, Utrecht, The Netherlands}{twan@clarin.eu}{https://orcid.org/0000-0002-1634-257X}{}
-% \author{Daan Broeder}{KNAW Humanities Cluster, Amsterdam, The Netherlands}{daan.broeder@di.huc.knaw.nl}{https://orcid.org/0000-0002-8446-3410}{}
-% \author{Hugo Manguinhas}{Europeana Foundation, The Hague, The Netherlands}{hugo.manguinhas@europeana.eu}{}{}
-% \author{Valentine Charles}{Europeana Foundation, The Hague, The Netherlands}{valentine.charles@europeana.eu}{https://orcid.org/0000-0003-4085-5778}{}
-% \authorrunning{N. Freire, A. Isaac, T. Goosen, D. Broeder, H. Manguinhas and V. Charles} %\authorrunning{J.\,Q. Public and J.\,R. Public}%mandatory. First: Use abbreviated first/middle names. Second (only in severe cases): Use first author plus 'et al.'
-% \Copyright{Nuno Freire, Antoine Isaac, Twan Goosen, Daan Broeder, Hugo Manguinhas and Valentine Charles}%mandatory, please use full first names. OASIcs license is "CC-BY";  http://creativecommons.org/licenses/by/3.0/
+\author{Antoine Isaac}{Europeana Foundation, The Hague, The Netherlands}{antoine.isaac@europeana.eu}{https://orcid.org/0000-0001-9767-6979}{}
+\author{Twan Goosen}{CLARIN ERIC, Utrecht, The Netherlands}{twan@clarin.eu}{https://orcid.org/0000-0002-1634-257X}{}
+\author{Daan Broeder}{KNAW Humanities Cluster, Amsterdam, The Netherlands}{daan.broeder@di.huc.knaw.nl}{https://orcid.org/0000-0002-8446-3410}{}
+\author{Hugo Manguinhas}{Europeana Foundation, The Hague, The Netherlands}{hugo.manguinhas@europeana.eu}{}{}
+\author{Valentine Charles}{Europeana Foundation, The Hague, The Netherlands}{valentine.charles@europeana.eu}{https://orcid.org/0000-0003-4085-5778}{}
+\authorrunning{N. Freire, A. Isaac, T. Goosen, D. Broeder, H. Manguinhas and V. Charles} %\authorrunning{J.\,Q. Public and J.\,R. Public}%mandatory. First: Use abbreviated first/middle names. Second (only in severe cases): Use first author plus 'et al.'
+\Copyright{Nuno Freire, Antoine Isaac, Twan Goosen, Daan Broeder, Hugo Manguinhas and Valentine Charles}%mandatory, please use full first names. OASIcs license is "CC-BY";  http://creativecommons.org/licenses/by/3.0/
 
-%anonymised author info (TODO: remove)
-\author{Author 1}{Affiliation1}{author@affiliation}{https://orcid.org/12345-67890}{} \author{Author 2}{Affiliation2}{author@affiliation}{https://orcid.org/12345-67890}{} \author{Author 3}{Affiliation3}{author@affiliation}{https://orcid.org/12345-67890}{} \author{Author 4}{Affiliation4}{author@affiliation}{https://orcid.org/12345-67890}{} \author{Author 5}{Affiliation5}{author@affiliation}{https://orcid.org/12345-67890}{} \author{Author 6}{Affiliation6}{author@affiliation}{https://orcid.org/12345-67890}{} \authorrunning{Author 1, Author 2, Author 3, Author 4, Author 5 and Author 6} \Copyright{Author 1, Author 2, Author 3, Author 4, Author 5 and Author 6}
+%anonymized author info
+% \author{Author 1}{Affiliation1}{author@affiliation}{https://orcid.org/12345-67890}{} \author{Author 2}{Affiliation2}{author@affiliation}{https://orcid.org/12345-67890}{} \author{Author 3}{Affiliation3}{author@affiliation}{https://orcid.org/12345-67890}{} \author{Author 4}{Affiliation4}{author@affiliation}{https://orcid.org/12345-67890}{} \author{Author 5}{Affiliation5}{author@affiliation}{https://orcid.org/12345-67890}{} \author{Author 6}{Affiliation6}{author@affiliation}{https://orcid.org/12345-67890}{} \authorrunning{Author 1, Author 2, Author 3, Author 4, Author 5 and Author 6} \Copyright{Author 1, Author 2, Author 3, Author 4, Author 5 and Author 6}
 
 \ccsdesc[300]{Applied computing~Digital libraries and archives}
 \ccsdesc[100]{Applied computing~Annotation}
@@ -48,9 +48,8 @@
 
 %\supplement{}%optional, e.g. related research data, source code, ... hosted on a repository like zenodo, figshare, GitHub, ...
 
-%\funding{(Optional) general funding statement \dots}%optional, to capture a funding statement, which applies to all authors. Please enter author specific funding statements as fifth argument of the \author macro.
+\funding{This work was partly supported by Portuguese  national funds through Fundação para a Ciência e a Tecnologia (FCT) with reference UID/CEC/50021/2013, and by the European Commission under contract number 30-CE-0885387/00-80.e.}%optional, to capture a funding statement, which applies to all authors. Please enter author specific funding statements as fifth argument of the \author macro.
 
-%\acknowledgements{I want to thank \dots}%optional
 
 %\nolinenumbers %uncomment to disable line numbering
 
@@ -160,7 +159,7 @@ A profile for representing full-text in EDM is a key requirement for achieving a
 \subsection{Context and requirements for designing the data model}
 \label{sec:contextandrequirements}
 
-Based on the corpus of full-text newspapers, the case studies and recommendations from the earlier Europeana projects \cite{Dunning15, Charles16}, we have identified these requirements:
+Based on the corpus of full-text newspapers, the case studies with research infrastructures and recommendations from the earlier Europeana projects \cite{Dunning15, Charles16}, we have identified these requirements:
 \begin{itemize}
 \item The availability of full-text must be stated explicitly in the metadata.
 \item The representation of full-text should be compatible with the representation of structured newspapers in the descriptive metadata.
@@ -191,7 +190,7 @@ As meeting the requirements of these related cases in similar ways is extremely 
 
 Our extension of EDM for representing full-text follows the recommendations of IIIF (in its coming version 3) and WA. Full-text is represented as the body of an annotation that has as target an image, as illustrated in Figure~\ref{fig:generalprincipals}. We model the image as an \verb+edm:WebResource+ (the usual EDM approach) and the text itself as a new proposed subclass of \verb+edm:WebResource+, 
 \verb+edm:FullTextResource+\footnote{The full-text comes as \verb+rdf:value+ for the \verb+edm:FullTextResource+, using WA’s `embedded text' pattern (\url{https://www.w3.org/TR/annotation-model/##embedded-textual-body}) with a type independent from the resource’s being used in an annotation, unlike WA’s \verb+oa:TextualBody+.}.
-Figure~\ref{fig:nopositioninfo} illustrates the simplest case. Annotations are modeled using WA's \verb+oa:Annotation+ class and \verb+oa:hasBody+ and \verb+oa:hasTarget+ properties. Annotations used for representing full-text must have the property \verb+oa:motivatedBy+ with the value \verb+oa:transcribing+, distinguishing them from Europeana annotations used for other motives, as well as following IIIF's latest best practices\footnote{Cf.\, IIIF API issue 1258: \url{https://github.com/IIIF/api/issues/1258}}
+Figure~\ref{fig:nopositioninfo} illustrates the simplest case. Annotations are modeled using WA's \verb+oa:Annotation+ class and \verb+oa:hasBody+ and \verb+oa:hasTarget+ properties. Annotations used for representing full-text must have the property \verb+oa:motivatedBy+ with the value \verb+edm:transcribing+, distinguishing them from Europeana annotations used for other motives, as well as following IIIF's latest best practices\footnote{Cf.\, IIIF API issue 1258: \url{https://github.com/IIIF/api/issues/1258}}
 (NB: we omit it from our figures for readability reasons).
 
 The extension supports two levels of detail for associating the full-text with the image: with and without its position within the image. The text can also be provided by value (a plain literal) or by reference (as a URI, and/or as a selection/extract from another text resource). The following sections present the details of these options.
@@ -267,14 +266,22 @@ resource\footnote{\verb+ProvidedCHO+ stands for `Provided Cultural Heritage Obje
 can be seen to apply to the whole full-text as well. Our profile assumes that when a (sub-component of) the full-text does not specify its language, then it inherits the language from the higher levels of its hierarchy. This pattern enables to represent cases when a word in one language is present within a text in another language. But there can be different languages, or a data publisher may prefer to express precise information that does not depend on implicit `propagation' rules between levels in the data. Therefore, the language may be specified at the level of any \verb+edm:FullTextResource+, using an RDF language tag on the \verb+rdf:value+ of the resource or the dc:language property\footnote{Here again there are two equivalent modeling alternatives: the `traditional’ RDF one (already used in EDM and one preferred by the WA model. We intend to accept both and publish both in parallel, but this choice is still open to community feedback.}.
 At the finest level of detail, languages may be specified on the oa:SpecificResource referring to text fragments. Figure~\ref{fig:languagespecification} illustrates using dc:language on the \verb+edm:FullTextResource+ and the \verb+oa:SpecificResource+.
 
+
+\subsection{Results of the application of the profile}
+
+At this time, the EDM full-text profile has had his first application at production-level. Europeana has converted the Europeana Newspapers corpus to the EDM full-text profile. The profile has, therefore, been already applied to over 10 million pages of a real newspaper corpus, in multiple languages and scripts. Since this corpus originates from several data providers from different countries using different practices for digitisation, we see this application also as evidence that the model can accommodate the different ways of structuring full-text in digitised objects. 
+The implementation of the full-text profile in the Europeana systems' infrastructure has also made significant steps. Europeana has adapted its infrastructure for ingestion to support the ingestion of full-text according to the profile. 
+Regarding indexing and retrieval of full-text EDM data, Europeana has completed a first version of its solution, which combines the joint retrieval of resources described by metadata only, with resources with full-text and metadata.   
+Europeana's implementation of the full-text has, as its final products a portal and an API. The portal is specialised for the newspapers collection\footnote{https://www.europeana.eu/portal/pt/collections/newspapers} and provides rich user-interfaces based on full-text retrieval and the associations, via image coordinates, between digitised images and the full-text, to a level of text granularity of words (when word level coordinates were recorded in the full-text during digitisation). The API now made available\footnote{https://pro.europeana.eu/data/newspapers-getting-started}, complements the existing Europeana API with functionality specialised in full-text, thus improving the capacity of Europeana for promoting data re-use of CH through research infrastructures and other target user groups of Europeana.
+
 \section{Future Work and Conclusion}
 \label{sec:conclusion}
 
 Europeana's investigations in exploring its newspapers full-text corpus with research infrastructures has provided valuable input for making CH corpora better discoverable, accessible, machine processable and citable in research contexts. The requirements identified for research usage of CH full-text corpora support several aspects of the current strategy of Europeana towards improving data quality and direct access to the media contents of CH digital objects \cite{publishingGuide}. 
 
-The currently aggregated full-text corpus of Europeana Newspapers has not grown since the end of the Europeana Newspapers project, and an aggregation process based on the ALTO profile was impossible to establish in a sustainable way at Europeana. The new model, being based on EDM and following the IIIF Community approach is expected to lower the technical barriers to establish a sustainable full-text aggregation process. Currently, Europeana is already converting the Europeana Newspapers corpus to the EDM full-text profile and adapting its infrastructure for ingestion of the corpus . In the near future, our EDM full-text profile is going to be used as the basis to re-start the aggregation processes of full-text newspapers content across the Europeana Network. In parallel, we will update the EDM full-text profile, by devising a more precise approach to the modeling alternatives that the current version allows – we have already begun to actively seek feedback from the IIIF Newspapers community. We will also tackle new requirement that could emerge during its adoption: for example, some Europeana stakeholders have voiced interested in an explicit representation of the granularity of the full-text (page, article, paragraph, line, word).
+The currently aggregated full-text corpus of Europeana Newspapers has not grown since the end of the Europeana Newspapers project, and an aggregation process based on the ALTO profile was impossible to establish in a sustainable way at Europeana. The new model, being based on EDM and following the IIIF Community approach is expected to lower the technical barriers to establish a sustainable full-text aggregation process. 
 
-Future work will also address the indexing and retrieval of full-text EDM data, as well as the evaluation of its capacity for supporting rich user-interfaces and data re-use through Europeana's APIs as well as through research infrastructures.
+In the near future, our EDM full-text profile is going to be used as the basis to restart the aggregation processes of full-text newspapers content across the Europeana Network. In parallel, we will update the EDM full-text profile, by devising a more precise approach to the modeling alternatives that the current version allows – we have already begun to actively seek feedback from the IIIF Newspapers community. We will also tackle new requirement that could emerge during its adoption: for example, some Europeana stakeholders have voiced interested in an explicit representation of the granularity of the full-text (page, article, paragraph, line, word).
 
 %%
 %% Bibliography
