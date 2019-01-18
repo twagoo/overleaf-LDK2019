@@ -50,7 +50,7 @@
 \funding{This work was partly supported by Portuguese  national funds through Fundação para a Ciência e a Tecnologia (FCT) with reference UID/CEC/50021/2013, and by the European Commission under contract number 30-CE-0885387/00-80.e.}%optional, to capture a funding statement, which applies to all authors. Please enter author specific funding statements as fifth argument of the \author macro.
 
 
-%\nolinenumbers %uncomment to disable line numbering
+\nolinenumbers %uncomment to disable line numbering
 
 %\hideOASIcs  %uncomment to remove references to OASIcs series (logo, DOI, ...), e.g. when preparing a pre-final version to be uploaded to arXiv or another public repository
 
@@ -128,9 +128,9 @@ CLARIN carried out a first analysis of the Europeana Newspapers corpus in 2015, 
 EDM\footnote{Available in CLARIN’s component registry:  \url{https://catalog.clarin.eu/ds/ComponentRegistry/##/?itemId=clarin.eu\%3Acr1\%3Ap_1475136016208}}.
 Europeana's metadata for Newspapers and other datasets can thus be made available within the CLARIN systems. 
 
-The desirable interoperability between the two infrastructures has not been achieved, however. The Newspapers full-text corpus, although discoverable within CLARIN, cannot yet be processed by CLARIN's tools in research workflows. The following requirements for how metadata and full-text content are made available by CHIs were noted and greatly influenced our work on extending EDM for exchanging full-text content:
+The desirable interoperability between the two infrastructures has not been achieved, however. The Newspapers full-text corpus, although partially discoverable within CLARIN, cannot yet be processed by CLARIN's tools in research workflows. The following requirements for how metadata and full-text content are made available by CHIs were noted and greatly influenced our work on extending EDM for exchanging full-text content:
 \begin{itemize}
-\item Direct links to content files – when CHIs only share with Europeana links to websites or viewers, the files cannot be processed by CLARIN (and others).
+\item Direct links to content files – when CHIs only expose links to websites or viewers in the metadata aggregated by Europeana, the files cannot be processed by CLARIN (and others).
 \item Technical metadata – information like media type and file size are essential for automated processing workflows and highly desirable for discovery
 \item Language of the content – most natural language processing tools are language dependent, making the language information carried in CH metadata essential.
 \end{itemize}
@@ -281,6 +281,8 @@ Europeana's investigations in exploring its newspapers full-text corpus with res
 The currently aggregated full-text corpus of Europeana Newspapers has not grown since the end of the Europeana Newspapers project, and an aggregation process based on the ALTO profile was impossible to establish in a sustainable way at Europeana. The new model, being based on EDM and following the IIIF Community approach is expected to lower the technical barriers to establish a sustainable full-text aggregation process. 
 
 In the near future, our EDM full-text profile is going to be used as the basis to restart the aggregation processes of full-text newspapers content across the Europeana Network. In parallel, we will update the EDM full-text profile, by devising a more precise approach to the modeling alternatives that the current version allows – we have already begun to actively seek feedback from the IIIF Newspapers community. We will also tackle new requirement that could emerge during its adoption: for example, some Europeana stakeholders have voiced interested in an explicit representation of the granularity of the full-text (page, article, paragraph, line, word).
+
+In parallel, CLARIN will carry out an assessment of the applicability of the full text content, as disseminated by Europeana, to its infrastructure and the connected tools in the context of various typical research use cases, covering resource discovery, retrieval and processing. On basis of the findings of this assessment, we expect to be able to fine-tune the full-text model and the content delivery mechanisms on the side of Europeana, and adapt the exploitation of Europeana's services by CLARIN accordingly, so as to achieve a broad integration of large volumes of full-text content with real-world applicability for the social sciences and digital humanities research communities.
 
 %%
 %% Bibliography
