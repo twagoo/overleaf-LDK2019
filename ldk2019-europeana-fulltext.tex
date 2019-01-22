@@ -22,7 +22,7 @@
 
 %TODO: anonymize author info before submission
 %\author{Nuno Freire}{INESC-ID, Lisbon, Portugal}{nuno.freire@tecnico.ulisboa.pt}{https://orcid.org/0000-0002-3632-8046}{This work was partly supported by Portuguese  national funds through Fundação para a Ciência e a Tecnologia (FCT) with reference UID/CEC/50021/2013, and by the European Commission under contract number 30-CE-0885387/00-80.e.}%mandatory, please use full name; only 1 author per \author macro; first two parameters are mandatory, other parameters can be empty. Please provide at least the name of the affiliation and the country. The full address is optional
-%\author{Antoine Isaac}{Europeana Foundation, The Hague, The Netherlands}{antoine.isaac@europeana.eu}{https://orcid.org/0000-0001-9767-6979}{}
+%\author{Antoine Isaac}{Europeana Foundation & Vrije Universiteit Amsterdam, The Netherlands}{antoine.isaac@europeana.eu}{https://orcid.org/0000-0001-9767-6979}{}
 %\author{Twan Goosen}{CLARIN ERIC, Utrecht, The Netherlands}{twan@clarin.eu}{https://orcid.org/0000-0002-1634-257X}{}
 %\author{Daan Broeder}{KNAW Humanities Cluster, Amsterdam, The Netherlands}{daan.broeder@di.huc.knaw.nl}{https://orcid.org/0000-0002-8446-3410}{}
 %\author{Hugo Manguinhas}{Europeana Foundation, The Hague, The Netherlands}{hugo.manguinhas@europeana.eu}{}{}
@@ -118,7 +118,7 @@ next to plain text content in terms of support by existing tools and also in pub
 
 \section{Needs for interoperability with Research Infrastructures}
 \label{sec:needsforinteroperability}
-Europeana is interested in investigating how research data infrastructures can facilitate the research use of CH resources. By leveraging on a European level and cross-discipline infrastructures, it hopes to reach researchers from all scientific disciplines, without having to work with many national and domain-specific research infrastructures or providing its own. We describe here the efforts on the Europeana Newspapers corpus conducted with two infrastructures: CLARIN and EUDAT. This corpus was aggregated from 11 CHIs during the Europeana Newspapers project. It contains metadata descriptions, digitized images and full-text of 911 newspaper titles that, in total, comprise over 11 million pages \cite{Dunning15}. We present, in this section, the interoperability challenges identified and what we did to tackle them. 
+Europeana is interested in investigating how research data infrastructures can facilitate the research use of CH resources. By leveraging on research infrastructures that operate at an European level and across scientific disciplines, it hopes to reach researchers from all scientific disciplines, without having to work with many national and domain-specific research infrastructures or providing its own. We describe here the efforts on the Europeana Newspapers corpus conducted with two infrastructures: CLARIN and EUDAT. This corpus was aggregated from 11 CHIs during the Europeana Newspapers project. It contains metadata descriptions, digitized images and full-text of 911 newspaper titles that, in total, comprise over 11 million pages \cite{Dunning15}, in multiple languages and scripts. We present, in this section, the interoperability challenges identified and what we did to tackle them. 
 
 \subsection{Interoperability with CLARIN}
 \label{sec:interoperabilitywithclarin}
@@ -162,6 +162,7 @@ Based on the corpus of full-text newspapers, the case studies with research infr
 \begin{itemize}
 \item The availability of full-text must be stated explicitly in the metadata.
 \item The representation of full-text should be compatible with the representation of structured newspapers in the descriptive metadata.
+\item The representation of full-text must allow the specification of the language and script of the text, and it should allow this specification to be done at several levels of granularity of the text (e.g. for a paragraph, for a word, etc.).
 \item URLs to views of the digital objects must be explicitly stated in the metadata.
 \item Multiple full-text resources must be referenced via direct URLs. 
 \item Resources requiring a protocol to be served need to be clearly identifiable.
@@ -267,12 +268,17 @@ can be seen to apply to the whole full-text as well. Our profile assumes that wh
 At the finest level of detail, languages may be specified on the \verb+oa:SpecificResource+ referring to text fragments. Figure~\ref{fig:languagespecification} illustrates using \verb+dc:language+ on the \verb+edm:FullTextResource+ and the \verb+oa:SpecificResource+.
 
 
-\subsection{Results of the application of the profile}
+\subsection{Application of the profile}
 
-At this time, the EDM full-text profile is already being applied at production-level. Europeana has converted the Europeana Newspapers corpus to the EDM full-text profile. Therefore, the profile has been applied to more than 10 million pages of real newspaper full-text data, in multiple languages and scripts. Since this corpus originates from several data providers from different countries using different practices for digitization, we see this application also as evidence that the model can accommodate the different ways of structuring full-text in digitized objects. 
-The implementation of the full-text profile in the Europeana systems' infrastructure has also made significant steps. Europeana has adapted its data ingestion infrastructure to support the ingestion of full-text according to the profile (not support for full-text existed previously, in Europeana). 
+At this time, the EDM full-text profile is already applied at production level. Europeana has converted the Europeana Newspapers corpus to the EDM full-text profile, therefore, the profile has been applied to more than 11 million pages of newspaper full-text transcriptions, in multiple languages and scripts. Since this corpus originates from data providers from different countries using different practices for digitisation, we see this application as evidence that the model can accommodate the different ways of structuring full-text in digitised objects. 
+
+Europeana has also made significant steps implementing the full-text profile in its systems. It has adapted its data infrastructure to support the ingestion of full-text according to the profile (no support for full-text existed previously in Europeana). 
+
 Regarding indexing and retrieval of full-text EDM data, Europeana has completed a first version of its solution, which combines the joint retrieval of resources described by metadata only, with resources with full-text and metadata.   
-Europeana's implementation of the full-text has as its final products a portal and an API. The portal is specialized for the newspapers corpus\footnote{https://www.europeana.eu/portal/pt/collections/newspapers} and provides rich user-interfaces based on full-text retrieval and the associations, via image coordinates, between digitized images and the full-text. Its user interface used the full-text do the detail of word-level granularity (when word level coordinates were recorded in the full-text during digitization). The API now made available\footnote{https://pro.europeana.eu/data/newspapers-getting-started}, complements the existing Europeana API with functionality specialized in full-text, thus improving the capacity of Europeana for promoting data re-use of CH through research infrastructures and other target user groups of Europeana. The API provides searching and access to the full-text, making it available according to the IIIF Presentation API. The IIIF output of the API is generated from the EDM full-text data.
+
+It has completed a first version of indexing and search services, which provides retrieval of full-text resources. This first version is not yet integrated with the main search systems of Europeana (that works only on metadata), but the first steps have taken place for investigating a solution for accomplishing a joint search system. 
+
+On top of this, Europeana’s final products are a portal and an API. The portal is specialised for the newspapers corpus\footnote{https://www.europeana.eu/portal/en/collections/newspapers} and provides a user-interface based on full-text retrieval and the association, via image coordinates, between digitised images and the transcription. This interface uses the full-text to down to word-level detail (when word level coordinates have been recorded during digitisation and OCR). The API  service now available for newspapers\footnote{https://pro.europeana.eu/data/newspapers-getting-started} complements the existing Europeana API with functionality specialised in full-text search and access, including making the full-text available according to the IIIF Presentation API - where the IIIF output is generated from the EDM representation. This improves Europeana's capacity to promote data re-use of CH content through research infrastructures and other target user groups.
 
 \section{Future Work and Conclusion}
 \label{sec:conclusion}
