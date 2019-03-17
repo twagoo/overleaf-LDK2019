@@ -21,17 +21,14 @@
 
 
 %TODO: anonymize author info before submission
-%\author{Nuno Freire}{INESC-ID, Lisbon, Portugal}{nuno.freire@tecnico.ulisboa.pt}{https://orcid.org/0000-0002-3632-8046}{This work was partly supported by Portuguese  national funds through Fundação para a Ciência e a Tecnologia (FCT) with reference UID/CEC/50021/2013, and by the European Commission under contract number 30-CE-0885387/00-80.e.}%mandatory, please use full name; only 1 author per \author macro; first two parameters are mandatory, other parameters can be empty. Please provide at least the name of the affiliation and the country. The full address is optional
-%\author{Antoine Isaac}{Europeana Foundation & Vrije Universiteit Amsterdam, The Netherlands}{antoine.isaac@europeana.eu}{https://orcid.org/0000-0001-9767-6979}{}
-%\author{Twan Goosen}{CLARIN ERIC, Utrecht, The Netherlands}{twan@clarin.eu}{https://orcid.org/0000-0002-1634-257X}{}
-%\author{Daan Broeder}{KNAW Humanities Cluster, Amsterdam, The Netherlands}{daan.broeder@di.huc.knaw.nl}{https://orcid.org/0000-0002-8446-3410}{}
-%\author{Hugo Manguinhas}{Europeana Foundation, The Hague, The Netherlands}{hugo.manguinhas@europeana.eu}{}{}
-%\author{Valentine Charles}{Europeana Foundation, The Hague, The Netherlands}{valentine.charles@europeana.eu}{https://orcid.org/0000-0003-4085-5778}{}
-\authorrunning{N. Freire, A. Isaac, T. Goosen, D. Broeder, H. Manguinhas and V. Charles} %\authorrunning{J.\,Q. Public and J.\,R. Public}%mandatory. First: Use abbreviated first/middle names. Second (only in severe cases): Use first author plus 'et al.'
+\author{Nuno Freire}{INESC-ID, Lisbon, Portugal}{nuno.freire@tecnico.ulisboa.pt}{https://orcid.org/0000-0002-3632-8046}{This work was partly supported by Portuguese  national funds through Fundação para a Ciência e a Tecnologia (FCT) with reference UID/CEC/50021/2019, and by the European Commission under contract number 30-CE-0885387/00-80.e.}%mandatory, please use full name; only 1 author per \author macro; first two parameters are mandatory, other parameters can be empty. Please provide at least the name of the affiliation and the country. The full address is optional
+\author{Antoine Isaac}{Europeana Foundation \& Vrije Universiteit Amsterdam, The Netherlands}{antoine.isaac@europeana.eu}{https://orcid.org/0000-0001-9767-6979}{}
+\author{Twan Goosen}{CLARIN ERIC, Utrecht, The Netherlands}{twan@clarin.eu}{https://orcid.org/0000-0002-1634-257X}{}
+\author{Daan Broeder}{KNAW Humanities Cluster, Amsterdam, The Netherlands}{daan.broeder@di.huc.knaw.nl}{https://orcid.org/0000-0002-8446-3410}{}
+\author{Hugo Manguinhas}{Europeana Foundation, The Hague, The Netherlands}{hugo.manguinhas@europeana.eu}{}{}
+\author{Valentine Charles}{Europeana Foundation, The Hague, The Netherlands}{valentine.charles@europeana.eu}{https://orcid.org/0000-0003-4085-5778}{}
+\authorrunning{N. Freire, A. Isaac, T. Goosen, D. Broeder, H. Manguinhas and V. Charles} %mandatory. First: Use abbreviated first/middle names. Second (only in severe cases): Use first author plus 'et al.'
 \Copyright{Nuno Freire, Antoine Isaac, Twan Goosen, Daan Broeder, Hugo Manguinhas and Valentine Charles}%mandatory, please use full first names. OASIcs license is "CC-BY";  http://creativecommons.org/licenses/by/3.0/
-
-%anonymized author info
-\author{Author 1}{Affiliation1}{author@affiliation}{https://orcid.org/12345-67890}{} \author{Author 2}{Affiliation2}{author@affiliation}{https://orcid.org/12345-67890}{} \author{Author 3}{Affiliation3}{author@affiliation}{https://orcid.org/12345-67890}{} \author{Author 4}{Affiliation4}{author@affiliation}{https://orcid.org/12345-67890}{} \author{Author 5}{Affiliation5}{author@affiliation}{https://orcid.org/12345-67890}{} \author{Author 6}{Affiliation6}{author@affiliation}{https://orcid.org/12345-67890}{} \authorrunning{Author 1, Author 2, Author 3, Author 4, Author 5 and Author 6} \Copyright{Author 1, Author 2, Author 3, Author 4, Author 5 and Author 6}
 
 \ccsdesc[300]{Applied computing~Digital libraries and archives}
 \ccsdesc[100]{Applied computing~Annotation}
@@ -79,53 +76,54 @@ Cultural heritage institutions hold collections of printed newspapers that are v
 
 \section{Introduction}
 \label{sec:introduction}
-Cultural Heritage (CH) Institutions, such as libraries and archives, hold collections of printed newspapers of the past centuries. These are valuable resources for historians, linguists and other researchers working in Digital Humanities. The retrieval of printed newspapers' content based on metadata only is a task nearly impossible, however. Cultural Heritage Institutions (CHIs) usually describe the series of a newspaper publication (typically known as `title level' description) and its individual publications (`issues') in their catalogs, but no description of individual articles. The typical use of the catalogs of newspapers is thus only to retrieve issues by date of publication, as there is no detail for effective retrieval of the content at finer-grained levels. 
+Cultural Heritage Institutions (CHI), such as libraries and archives, hold collections of printed newspapers of the past centuries. These are valuable resources for historians, linguists and other researchers working in Digital Humanities. The retrieval of printed newspapers' content based on metadata only is a task nearly impossible, however. Cultural Heritage Institutions usually describe the series of a newspaper publication (typically known as `title level' description) and its individual publications (`issues') in their catalogs, but no description of individual articles. The typical use of the catalogs of newspapers is thus only to retrieve issues by date of publication, as there is no detail for effective retrieval of the content at finer-grained levels. 
 
 The wide interest for newspapers and the challenges they pose for retrieval has motivated CHIs to prioritize the digitization of their newspapers collections. CHIs also realized that the retrieval of newspapers' content based on machine readable full-text is particularly important, given the unavailability of article level descriptions in the catalogs. Accordingly, CHIs have also sought to apply Optical Character Recognition (OCR) during the digitization process.  
 
-Our work addresses the general problem of the retrieval of newspapers in the context of aggregations of digital CH resources, in particular that of Europeana. Europeana seeks to facilitate the use of resources from and about Europe. It enables access to objects via its Collections 
-portal\footnote{\url{https://europeana.eu}}, which supports all official languages of Europe, and its open APIs enable third-party applications. Europeana is based on metatada provided by its CHI partners and presently holds metadata from over 3,700
-CHIs\footnote{\url{https://pro.europeana.eu/files/Europeana_Professional/Projects/Project_list/Europeana_DSI/Deliverables/europeana-dsi-d1.2-amount-of-data-partners-and-outreach-to-major-institutions.pdf}}.
+Our work addresses the general problem of the retrieval of newspapers in the context of aggregations of digital Cultural Heritage (CH) resources, in particular that of Europeana. Europeana seeks to facilitate the use of resources from and about Europe. It enables access to objects via its Collections 
+portal,\footnote{\url{https://europeana.eu}} which supports all official languages of Europe, and its open APIs enable third-party applications. Europeana is based on metatada provided by its CHI partners and presently holds metadata from over 3,700
+CHIs.\footnote{\url{https://pro.europeana.eu/files/Europeana_Professional/Projects/Project_list/Europeana_DSI/Deliverables/europeana-dsi-d1.2-amount-of-data-partners-and-outreach-to-major-institutions.pdf}}
 Providing access to newspapers is relevant to Europeana's mission, especially for promoting the re-use of CH resources for research. Europeana indeed also aims to facilitate research, especially for the digital humanities, via its Europeana Research
-initiative\footnote{\url{https://research.europeana.eu}}.
+initiative.\footnote{\url{https://research.europeana.eu}}
 This initiative seeks to address issues related to, e.g., licensing, which affect the research re-use of CH metadata and content. In particular, it has identified research re-use of newspapers resources as a key use case, as well as an area with strong system and data interoperability challenges.
 
 Digitized newspapers are Europeana's first case of aggregation and distribution of full-text CH resources. Europeana's systems have relied so far on metadata and links to digitized resources at partners' sites. The Europeana Data Model (EDM) \cite{edm} allows it to perform scalable aggregation of (and access to) references to digital representations of CH artifacts with rich context metadata. EDM follows the Linked Open Data principles \cite{BernersLee06}. An important aspect of EDM is its flexibility and genericity: it can be easily mapped to other (CH) data models and extended \cite{Charles15}. This makes it a potential base for the interoperability of full-text resources within the Europeana ecosystem.
 
 This paper presents how we have tested this assumption by trying to extend EDM to cater for interoperability of full-text CH corpora. The first aim of our work is to support a centralized search engine and rich user interfaces. But we have also investigated the issue of interoperability of full-text between Europeana and research infrastructures (EUDAT and CLARIN). Our work focuses on Europeana and research use, but we claim it has impact on other application contexts, as we sought to align with the generic International Image Interoperability Framework
-(IIIF)\footnote{\url{https//iiif.io}}. 
+(IIIF).\footnote{\url{https//iiif.io}} IIIF is a family of specifications that were conceived to facilitate systematic reuse of image resources in digital repositories maintained by CH institutions. It specifies sev-eral HTTP based web services covering access to images, the presentation and structure of complex digital objects composed of one or more images, and searching within their content. IIIF’s strength resides in the presentation possibilities it provides for end-users. 
 We present related work on digitized newspapers and the use of CH data in research infrastructures in Section~\ref{sec:relatedwork}. Section~\ref{sec:needsforinteroperability} presents the exploratory work conducted by Europeana, EUDAT and CLARIN, and the interoperability requirements derived from it. Section~\ref{sec:buildingfulltextprofile} presents our EDM extension for full-text, and Section~\ref{sec:conclusion} concludes. 
 
 \section{Related work}
 \label{sec:relatedwork}
 
 Several initiatives exist worldwide with similar target user groups and use cases as Europeana, with respect to aggregation of digitized newspapers. The organizational structure and technical interoperability context of Europeana are quite different, however. For example, Chronicling 
-America\footnote{\url{https://chroniclingamerica.loc.gov/}}, a national aggregation of newspapers in the United States of America, gathers its corpus from the digitization conducted under the National Newspaper Digitization Program. The direct relation with the digitization process results in more homogeneous metadata and full-text content to provide access to.
+America,\footnote{\url{https://chroniclingamerica.loc.gov/}} a national aggregation of newspapers in the United States of America, gathers its corpus from the digitization conducted under the National Newspaper Digitization Program. The direct relation of Chronicling 
+America with the digitization process, results in more homogeneous metadata and full-text content to provide access to.
 
 Europeana Newspapers \cite{Dunning15} was an earlier project from the Europeana community, which aggregated metadata and full-text content in a portal that, while currently hosted by Europeana, sits on a completely disconnected platform. The project established interoperability by defining a METS/ALTO profile \cite{Muehlberger14}, but its application was restricted to the project and did not spread to other CHIs afterwards.
 
 The IIIF Community has conducted similar work to ours in establishing a generic representation of full-text associated with images for the IIIF Presentation API. We participate in a IIIF Newspapers Community Group that gathers IIIF community members working with digitized newspapers. The IIIF representation patterns strongly inspired our work. These, however, are quite generic and the connection with (descriptive) metadata is rather loose in the IIIF presentation API, which relies on linking to document using models like EDM for representing fully-fledged metadata. Furthermore, directly relying on IIIF APIs is an obstacle for the metadata providers who cannot deploy IIIF services for their content.
 
 Regarding interoperability with research infrastructures, related work in CH digitized resources and OCR full-text includes Herbadrop \cite{Dugenie2017}. This initiative works with resources from museums and botanical gardens, which own collections of plant samples with detailed annotations from botanists. Herbadrop has worked with the EUDAT 
-CDI\footnote{EUDAT Collaborative Data Infrastructure; \url{https://www.eudat.eu/eudatcdi}}
+CDI;\footnote{EUDAT Collaborative Data Infrastructure; \url{https://www.eudat.eu/eudatcdi}}
 as part of a data pilot \cite{Dugenie2017}. 
 
 Finally, some CHIs provide data to 
-CLARIN\footnote{Common Language Resources and Technology Infrastructure; \url{https://www.clarin.eu/}},
+CLARIN,\footnote{Common Language Resources and Technology Infrastructure; \url{https://www.clarin.eu/}}
 in particular university libraries. CLARIN aggregates CH resources in a similar process to Europeana's but uses a different metadata format \cite{cmdi}. Regarding full-text corpora within CLARIN, we observe a prevalence of the Text Encoding Initiative (TEI)
 format\footnote{TEI -- Text Encoding Initiative; \url{https://www.tei-c.org/}}
 next to plain text content in terms of support by existing tools and also in published research. TEI usage within the Europeana Network is limited: it is only present in CHIs that focus on supporting researchers. Plain text content is often not provided by CHIs.
 
 \section{Needs for interoperability with Research Infrastructures}
 \label{sec:needsforinteroperability}
-Europeana is interested in investigating how research data infrastructures can facilitate the research use of CH resources. By leveraging on research infrastructures that operate at an European level and across scientific disciplines, it hopes to reach researchers from all scientific disciplines, without having to work with many national and domain-specific research infrastructures or providing its own. We describe here the efforts on the Europeana Newspapers corpus conducted with two infrastructures: CLARIN and EUDAT. This corpus was aggregated from 11 CHIs during the Europeana Newspapers project. It contains metadata descriptions, digitized images and full-text of 911 newspaper titles that, in total, comprise over 11 million pages \cite{Dunning15}, in multiple languages and scripts. We present, in this section, the interoperability challenges identified and what we did to tackle them. 
+Europeana is interested in investigating how research data infrastructures can facilitate the research use of CH resources. By leveraging on research infrastructures that operate at a European level and across scientific disciplines, it hopes to reach researchers from all scientific disciplines, without having to work with many national and domain-specific research infrastructures or providing its own. We describe here the efforts on the Europeana Newspapers corpus conducted with two infrastructures: CLARIN and EUDAT. This corpus was aggregated from 11 CHIs during the Europeana Newspapers project. It contains metadata descriptions, digitized images and full-text of 911 newspaper titles that, in total, comprise over 11 million pages \cite{Dunning15}, in multiple languages and scripts. We present, in this section, the interoperability challenges identified and what we did to tackle them. 
 
 \subsection{Interoperability with CLARIN}
 \label{sec:interoperabilitywithclarin}
 CLARIN is a federation of language data repositories, service centers and centers of expertise. CLARIN aggregates metadata and makes the underlying resources discoverable and usable within research workflows. It allows researchers to carry out natural language processing tasks by invoking processing tools directly from its generic user interface. Establishing good interoperability between Europeana and CLARIN can help fitting a large number of CH resources into CLARIN's supported workflows. It will open up new applications for CLARIN's processing tools and promote research incorporating CH resources.
 
 CLARIN carried out a first analysis of the Europeana Newspapers corpus in 2015, establishing goals and a ground for connecting the two infrastructures and full-text interoperability. Later, we sought to address the interoperability issue for metadata \cite{Goosen17}. The two infrastructures use specific metadata models: EDM for Europeana and the Component MetaData Infrastructure (CMDI) for CLARIN \cite{cmdi}. Interoperability is achieved via CLARIN's metadata conversion mechanisms, based on a CMDI profile for 
-EDM\footnote{Available in CLARIN’s component registry:  \url{https://catalog.clarin.eu/ds/ComponentRegistry/##/?itemId=clarin.eu\%3Acr1\%3Ap_1475136016208}}.
+EDM.\footnote{Available in CLARIN’s component registry:  \url{https://catalog.clarin.eu/ds/ComponentRegistry/##/?itemId=clarin.eu\%3Acr1\%3Ap_1475136016208}}
 Europeana's metadata for Newspapers and other datasets can thus be made available within the CLARIN systems. 
 
 The desirable level of interoperability between the two infrastructures has not been achieved, however. The newspapers full-text corpus, although partially discoverable within CLARIN, cannot yet be processed by CLARIN's tools in research workflows. The following requirements for how metadata and full-text content are made available by CHIs were noted and greatly influenced our work on extending EDM for exchanging full-text content:
@@ -147,7 +145,7 @@ EUDAT is a European infrastructure of integrated data services devoted to scient
 \end{itemize}
 
 An evaluation of the available EUDAT services was conducted, using the newspapers corpus as case study. The two infrastructures were successfully interconnected and EUDAT fulfilled the expectations for making the corpus available to researchers and for computational processing. The persistent identification of EUDAT resources also met the citability requirement. The EUDAT service did not scale to the dimension of the corpus, but only due to an underestimation of the required computational capacity during the pilot \cite{Dugenie2017}. Beyond the full-text corpus case study, interoperability was also trialled for metadata-based discovery of CH datasets. Both infrastructures have common underlying technologies that facilitate interoperability, including on modelling full-text, since EUDAT is developing its semantic annotation service based on the W3C Web Annotation Data 
-Model\footnote{\url{https://www.w3.org/TR/annotation-model/}},
+Model,\footnote{\url{https://www.w3.org/TR/annotation-model/}}
 which is a key component of the EDM extension we are going to present in the next section.
 
 \section{Building a full-text profile for the Europeana Data Model}
@@ -161,7 +159,7 @@ A profile for representing full-text in EDM is a key requirement for achieving a
 Based on the corpus of full-text newspapers, the case studies with research infrastructures and recommendations from the earlier Europeana projects \cite{Dunning15, Charles16}, we have identified these requirements:
 \begin{itemize}
 \item The availability of full-text must be stated explicitly in the metadata.
-\item The representation of full-text should be compatible with the representation of structured newspapers in the descriptive metadata.
+\item The representation of full-text should be compatible with the representation of the newspapers' structure (issue, page, article, etc.) in the descriptive metadata.
 \item The representation of full-text must allow the specification of the language and script of the text, and it should allow this specification to be done at several levels of granularity of the text (e.g. for a paragraph, for a word, etc.).
 \item URLs to views of the digital objects must be explicitly stated in the metadata.
 \item Multiple full-text resources must be referenced via direct URLs. 
@@ -176,7 +174,7 @@ The IIIF community has suggested to publish textual representations of (part of)
 `manifests'\footnote{IIIF manifests are `the overall description of the structure and properties of the digital representation of an object.'; \url{http://iiif.io/api/presentation/2.0/##primary-resource-types}}
 of the newspapers, as a list of annotations, each one referring to a portion of the full-text and indicating its corresponding position in the image of a page. Representing full-text as annotations seems the best solution as it can support simple scenarios such as the positioning of a text fragment on an image as well as more complex ones like OCR correction.
 
-This approach, besides its community traction, is compatible with the Linked Data vision and fits well Europeana's use of annotations for other purposes \cite{Gordea15}. One of the cases that has recently emerged in Europeana is indeed the representation of manual transcriptions of content\footnote{Cf.\, Europeana’s initiative on transcribing WWI-related content; \url{https://transcribathon.com/}}.
+This approach, besides its community traction, is compatible with the Linked Data vision and fits well Europeana's use of annotations for other purposes \cite{Gordea15}. One of the cases that has recently emerged in Europeana is indeed the representation of manual transcriptions of content.\footnote{Cf.\, Europeana’s initiative on transcribing WWI-related content; \url{https://transcribathon.com/}}
 As meeting the requirements of these related cases in similar ways is extremely desirable, we decided to follow the IIIF Community approach. Our modelling exercise thus becomes one of fitting into EDM a representation of the full-text content of newspapers as annotations on the images of newspapers' pages. 
 
 \subsection{EDM extension addressing the initial full-text requirements}
@@ -189,7 +187,7 @@ As meeting the requirements of these related cases in similar ways is extremely 
 \end{figure}
 
 Our extension of EDM for representing full-text follows the recommendations of IIIF (in its coming version 3) and WA. Full-text is represented as the body of an annotation that has as target an image, as illustrated in Figure~\ref{fig:generalprincipals}. We model the image as an \verb+edm:WebResource+ (the usual EDM approach) and the text itself as a new proposed subclass of \verb+edm:WebResource+, 
-\verb+edm:FullTextResource+\footnote{The full-text comes as \verb+rdf:value+ for the \verb+edm:FullTextResource+, using WA’s `embedded text' pattern (\url{https://www.w3.org/TR/annotation-model/##embedded-textual-body}) with a type independent from the resource’s being used in an annotation, unlike WA’s \verb+oa:TextualBody+.}.
+\verb+edm:FullTextResource+.\footnote{The full-text comes as \verb+rdf:value+ for the \verb+edm:FullTextResource+, using WA’s `embedded text' pattern (\url{https://www.w3.org/TR/annotation-model/##embedded-textual-body}) with a type independent from the resource’s being used in an annotation, unlike WA’s \verb+oa:TextualBody+.}
 Figure~\ref{fig:nopositioninfo} illustrates the simplest case. Annotations are modeled using WA's \verb+oa:Annotation+ class and \verb+oa:hasBody+ and \verb+oa:hasTarget+ properties. Annotations used for representing full-text must have the property \verb+oa:motivatedBy+ with the value \verb+edm:transcribing+, distinguishing them from Europeana annotations used for other motives, as well as following IIIF's latest best practices\footnote{Cf.\, IIIF API issue 1258: \url{https://github.com/IIIF/api/issues/1258}}
 (NB: we omit it from our figures for readability reasons).
 
@@ -264,7 +262,7 @@ Some digitization efforts apply segmentation techniques to detect the independen
 
 The profile allows the indication of language of the full-text at several levels of detail. At the most general level, the language indicated in the data for the original cultural object (using Dublin Core's \verb+dc:language+ property on EDM's \verb+edm:ProvidedCHO+
 resource\footnote{\verb+ProvidedCHO+ stands for `Provided Cultural Heritage Object'. It is the original object that is described. It may be either a physical object (painting, book, etc.) or digital-born object.})
-can be seen to apply to the whole full-text as well. Our profile assumes that when a (sub-component of) the full-text does not specify its language, then it inherits the language from the higher levels of its hierarchy. This pattern enables to represent cases when a word in one language is present within a text in another language. But there can be different languages, or a data publisher may prefer to express precise information that does not depend on implicit `propagation' rules between levels in the data. Therefore, the language may be specified at the level of any \verb+edm:FullTextResource+, using an RDF language tag on the \verb+rdf:value+ of the resource or the \verb+dc:language+ property\footnote{Here again there are two equivalent modeling alternatives: the `traditional’ RDF one (already used in EDM and one preferred by the WA model. We intend to accept both and publish both in parallel, but this choice is still open to community feedback.}.
+can be seen to apply to the whole full-text as well. Our profile assumes that when a (sub-component of) the full-text does not specify its language, then it inherits the language from the higher levels of its hierarchy. This pattern enables to represent cases when a word in one language is present within a text in another language. But there can be different languages, or a data publisher may prefer to express precise information that does not depend on implicit `propagation' rules between levels in the data. Therefore, the language may be specified at the level of any \verb+edm:FullTextResource+, using an RDF language tag on the \verb+rdf:value+ of the resource or the \verb+dc:language+ property.\footnote{Here again there are two equivalent modeling alternatives: the `traditional’ RDF one (already used in EDM and one preferred by the WA model. We intend to accept both and publish both in parallel, but this choice is still open to community feedback.}
 At the finest level of detail, languages may be specified on the \verb+oa:SpecificResource+ referring to text fragments. Figure~\ref{fig:languagespecification} illustrates using \verb+dc:language+ on the \verb+edm:FullTextResource+ and the \verb+oa:SpecificResource+.
 
 
